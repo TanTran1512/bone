@@ -1,0 +1,16 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Input parameters used for 
+% Cell Receptor Model 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+1.0e-1     % (1) be ... conformational selectivity 
+1.0e+3     % (2) k1D ... equilibrium dissociation constant 
+1.0e-3     % (3) Ca dissociation
+1.0e-3     % (4) Ci dissociation
+1.0e-4     % (5) conversion Ra->Ri
+1.0e-3     % (6) conversion Ri->Ra
+0.4        % (7) conversion rate for Ca->Ci
+2.0e-3     % (8) conversion rate for Ci->Ca
+5.0e-3     % (9) clearance rate for PTH
+18         % (10) total # of receptors

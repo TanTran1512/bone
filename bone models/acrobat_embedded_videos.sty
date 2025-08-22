@@ -1,0 +1,84 @@
+% embed videos in PDF file
+% works with Adobe Acrobat (Reader / Pro)
+% \includevideo{my_video.mp4}
+% \includevideo[width=16em,keepaspectratio]{my_video.mp4}
+
+\ProvidesPackage{acrobat_embedded_videos}
+
+\def\@autoplay{XA} % XA stands for play-on-click (default)
+\DeclareOption{autoplay}{\def\@autoplay{PV}}
+\ProcessOptions
+
+\RequirePackage[bigfiles]{pdfbase}
+
+% based on https://tex.stackexchange.com/questions/516029/media9-is-becoming-obsolete-dec-2020-any-alternatives-for-embedding-video-audio/516102#516102
+\ExplSyntaxOn
+\cs_new:Npn\embedvideo#1#2#3{
+	\leavevmode
+	\pbs_pdfobj:nnn{}{fstream}{{}{#2}}
+	\pbs_pdfobj:nnn{}{dict}{
+		/Type/Filespec/F~(#2)/UF~(#2)
+		/EF~<</F~\pbs_pdflastobj:>>
+	}
+	\tl_set:Nx\video{\pbs_pdflastobj:}%
+	%
+	\pbs_pdfobj:nnn{}{dict}{
+		/Type/RichMediaInstance/Subtype/Video
+		/Asset~\video
+		/Params~<</Binding/Foreground>>
+	}
+	%
+	\pbs_pdfobj:nnn{}{dict}{
+		/Type/RichMediaConfiguration/Subtype/Video
+		/Instances~[\pbs_pdflastobj:]
+	}
+	%
+	\pbs_pdfobj:nnn{}{dict}{
+		/Type/RichMediaContent
+		/Assets~<<
+		/Names~[(#2)~\video]
+		>>
+		/Configurations~[\pbs_pdflastobj:]
+	}
+	\tl_set:Nx\rmcontent{\pbs_pdflastobj:}%
+	%
+	\pbs_pdfobj:nnn{}{dict}{
+		/Activation~<<
+		/Condition/#3
+		/Presentation~<<
+		/Transparent~true
+		/Style/Embedded
+		/PlayCount~10
+		/PassContextClick~true
+		>>
+		>>
+		/Deactivation~<</Condition/PC>>
+	}
+	%
+	\hbox_set:Nn\l_tmpa_box{#1}
+	\tl_set:Nx\l_box_wd_tl{\dim_use:N\box_wd:N\l_tmpa_box}
+	\tl_set:Nx\l_box_ht_tl{\dim_use:N\box_ht:N\l_tmpa_box}
+	\tl_set:Nx\l_box_dp_tl{\dim_use:N\box_dp:N\l_tmpa_box}
+	\pbs_pdfxform:nnnnn{1}{1}{}{}{\l_tmpa_box}
+	%
+	\pbs_pdfannot:nnnn{\l_box_wd_tl}{\l_box_ht_tl}{\l_box_dp_tl}{
+		/Subtype/RichMedia
+		/BS~<</W~0/S/S>>
+		/Contents~(embedded~video~file:#2)
+		/NM~(rma:#2)
+		/AP~<</N~\pbs_pdflastxform:>>
+		/RichMediaSettings~\pbs_pdflastobj:
+		/RichMediaContent~\rmcontent
+	}
+	\phantom{#1}
+}%
+\ExplSyntaxOff
+
+\renewcommand{\includevideo}[2][]{%
+	\def\includeargs{#1}
+	\ifx\includeargs\empty
+		\embedvideo{\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{videos/preview_images/#2.png}}{videos/#2}{\@autoplay}
+	\else
+		\embedvideo{\includegraphics[#1]{videos/preview_images/#2.png}}{videos/#2}{\@autoplay}
+	\fi
+}

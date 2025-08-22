@@ -1,0 +1,71 @@
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{multimedia}
+\newcommand{\includevideo}[2][]{%
+	\movie[]%
+	{%
+		\def\includeargs{#1}
+		\ifx\includeargs\empty
+			\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{videos/preview_images/#2.png}%
+		\else
+			\includegraphics[#1]{videos/preview_images/#2.png}%
+		\fi
+	}%
+	{videos/#2}%
+}
+
+% literature references
+% ---------------------
+
+% number of shown authors
+\def \numberOfAuthors{3}
+% use "et al" for the remaining authors (0=no, 1=yes)
+\def \etal{1}
+\usepackage[
+    backend=biber,
+    sorting=none,
+    doi=true,
+    style=ieee,
+    maxbibnames=999,
+    mincitenames=\numberOfAuthors,
+    maxcitenames=\numberOfAuthors,
+]{biblatex}
+
+\DefineBibliographyStrings{english}{%
+    % redefine "and" in citation 
+	and = {\&},
+}
+\def \false{0}
+\if\etal\false
+	\DefineBibliographyStrings{english}{andothers={},}
+\fi
+\renewcommand{\cite}[1]{%
+	{\scriptsize \textcolor{BaseDarkColorA}{\textrm{\textsc{\citeauthor{#1}}~\citeyear{#1}}}}
+}
+
+% notes
+% -----
+\renewcommand{\note}[1]{%
+	{\scriptsize \textcolor{BaseDarkColorA}{\text{#1}}}
+}
+
+
+% math
+% ----
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage{amstext}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{cancel}
+
+
+\makeatletter
+\renewcommand*{\@textcolor}[3]{%
+  \protect\leavevmode
+  \begingroup
+    \color#1{#2}#3%
+  \endgroup
+}
+\makeatother

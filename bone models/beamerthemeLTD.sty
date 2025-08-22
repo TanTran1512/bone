@@ -1,0 +1,314 @@
+% LTD beamer theme
+% ================
+
+% additional options
+% ------------------
+
+% boolean option to activate presenter notes
+\newif\if@presenternotes
+\@presenternotesfalse % by default, notes are off
+\DeclareOptionBeamer{presenternotes}{\@presenternotestrue}
+
+\ProcessOptionsBeamer
+
+
+% presenter notes (Pympress)
+% --------------------------
+% \note{note to myself}
+
+\usepackage{pdfcomment}
+
+\if@presenternotes
+	\newcommand{\presenternote}[1]{\pdfcomment{#1}}
+\else
+	\newcommand{\presenternote}[1]{}
+\fi
+
+
+% date format
+% -----------
+% \today
+
+\usepackage{datetime2}
+\DTMsetdatestyle{ddmmyyyy}
+\DTMsetup{datesep={.}}
+
+
+% LTD colors
+% ----------
+
+\definecolor{LTDLogoDarkBlue}{RGB}{61, 87, 166}
+\definecolor{LTDLogoLightBlue}{RGB}{102, 202, 220}
+
+\definecolor{caltechgray}{gray}{0.55}
+\definecolor{ltdred}{rgb}{0.7, 0.0, 0.0}
+\definecolor{ltdgreen}{rgb}{0.0, 0.5, 0.0}
+\definecolor{ltdblue}{rgb}{0.0, 0.0, 0.5}
+
+
+% base theme
+% ----------
+
+\usetheme{Boadilla}
+
+\usepackage[institute=Tech]{beamercolorthemefau}
+\useinnertheme{circles}
+\useoutertheme{infolines}
+
+\usepackage[scaled=.92]{helvet}
+
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% left and right margins
+\setbeamersize{
+    text margin left=2em,
+    text margin right=2em
+}
+
+
+% math font
+% ---------
+\usefonttheme[onlymath]{serif}
+
+
+% header
+% ------
+
+\newcommand*{\logos}[1]{\newcommand{\insertlogos}{#1}}
+
+\newcommand{\AddLogo}[2]{
+	\raisebox{-0.5\height}{
+		\includegraphics[height=#2]{logos/#1}%
+	}
+}
+
+\makeatletter
+\setbeamertemplate{headline}{
+	\vspace*{0.5ex}
+	\begin{beamercolorbox}[wd=\paperwidth,ht=5.25ex,dp=2.5ex]{white}%
+		\raggedright
+		\hspace*{2em}
+		{
+			\sffamily\large\bfseries\insertsection\quad
+			\ifx \insertsubsection \empty%
+			\else
+				~-- \quad\insertsubsection
+			\fi
+			\hfill\raisebox{0.3em}[0pt][0pt]{\insertlogos}
+		}
+		\hspace*{0.5em}
+	\end{beamercolorbox}
+	\hspace*{2em}
+    \textcolor{SeparationLineColor}{\rule{\paperwidth-2ex}{0.25ex}}
+	\vspace*{0.5ex}
+}
+\makeatother
+
+
+% footer
+% ------
+
+\makeatletter
+\setbeamertemplate{footline}{
+    \hspace{2em}
+    \textcolor{SeparationLineColor}{\rule{\paperwidth-2em}{0.25ex}}
+	\begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=2.5ex]{white}
+		\vspace{-2pt}
+		\hspace{1.45em}
+        \ifdefined\insertshortevent ~\textcolor{BaseColor}{\insertshortevent~ --} \fi
+		\ifdefined\insertshortlocation ~\textcolor{BaseColor}{\insertshortlocation,}\fi
+		~\textcolor{BaseColor}{\insertshortdate}
+		\hfill \textcolor{BaseColor}{\insertframenumber}\hspace{2em}
+	\end{beamercolorbox}
+}
+\makeatother
+
+
+% information about presentation
+% ------------------------------
+
+\newcommand*{\location}[2][]{
+	\def\shortlocationname{#1}
+	\def\longlocationname{#2}
+	\ifx\shortlocationname\empty
+		\def\shortlocationname{\longlocationname}
+	\fi
+	\newcommand{\insertshortlocation}{\shortlocationname}
+	\newcommand{\insertlocation}{\longlocationname}
+}
+
+\newcommand*{\event}[2][]{
+	\def\shorteventname{#1}
+	\def\longeventname{#2}
+	\ifx\shorteventname\empty
+		\def\shorteventname{\longeventname}
+	\fi
+	\newcommand{\insertshortevent}{\shorteventname}
+	\newcommand{\insertevent}{\longeventname}
+}
+
+
+% title page
+% ----------
+
+\setbeamertemplate{title page}{
+	\vspace{3em}
+		{\linespread{1.2}\Large\bfseries\inserttitle\par}\par
+		\insertsubtitle\par
+		{\vspace{2em}\bfseries\insertauthor}\par
+		\vspace{2em}
+		{\footnotesize\insertinstitute}\par
+		\vspace{2em}
+		{\footnotesize\ifdefined\insertevent \insertevent \hspace{2ex}--\hspace{2ex}\fi%
+		\ifdefined\insertlocation \insertlocation, \fi%
+		\insertdate\par}
+}
+
+
+\newcommand*{\titlelogos}[1]{\newcommand{\inserttitlelogos}{#1}}
+
+
+\makeatletter
+\def\ps@titelseite{%
+    \setbeamertemplate{background}{
+        \begin{beamercolorbox}[wd=1.1\paperwidth, ht=\paperheight]{title page}%
+            \includegraphics[width=1.06\paperwidth]{logos/TechFakBackground.jpg}
+        \end{beamercolorbox}
+    }
+    \setbeamertemplate{headline}{
+        \vspace*{0.75ex}
+        \begin{beamercolorbox}[wd=\paperwidth,ht=7.25ex,dp=6ex]{}%
+            \raggedright
+            \hspace*{2em}%
+            \inserttitlelogos%
+            \hspace*{0.5em}%
+        \end{beamercolorbox}%
+        \hspace*{2em}
+        \textcolor{SeparationLineColor}{\rule{\paperwidth-2ex}{0.4ex}}
+    }
+    \setbeamertemplate{footline}{}
+}
+\addtobeamertemplate{title page}{\thispagestyle{titelseite}}{}
+\makeatother
+
+
+% outline
+% -------
+
+% without numbers
+\setbeamertemplate{section in toc}[default]
+\setbeamertemplate{subsection in toc}[default]
+
+% with numbers
+% \setbeamertemplate{section in toc}[sections numbered]
+% \setbeamertemplate{subsection in toc}[subsections numbered]
+
+
+\setbeamertemplate{section in toc shaded}{%
+    \begin{colormixin}{0!BaseColorA}%
+    \usebeamertemplate{section in toc}%
+    \end{colormixin}%
+    \unskip%
+}
+
+\setbeamertemplate{subsection in toc shaded}{%
+    \begin{colormixin}{0!BaseColorA}%
+    \usebeamertemplate{subsection in toc}%
+    \end{colormixin}%
+    \unskip%
+}
+
+
+% section and subsection links
+% ----------------------------
+
+\makeatletter
+% Insert [short title] for \section in Outline
+\patchcmd{\beamer@section}{{#2}{\the\c@page}}{{#1}{\the\c@page}}{}{}
+% Insert [short title] for \section in Navigation
+\patchcmd{\beamer@section}{{\the\c@section}{\secname}}{{\the\c@section}{#1}}{}{}
+% Insert [short title] for \subsection in Outline
+\patchcmd{\beamer@subsection}{{#2}{\the\c@page}}{{#1}{\the\c@page}}{}{}
+% Insert [short title] for \subsection in Navigation
+\patchcmd{\beamer@subsection}{{\the\c@subsection}{#2}}{{\the\c@subsection}{#1}}{}{}
+\makeatother
+
+
+% itemize and enumerate
+% -------------------------------------
+
+% set indentation
+\setlength{\leftmargini}{1.3em}
+\setlength{\leftmarginii}{1em}
+\setlength{\leftmarginiii}{1em}
+
+% don't decrease font size
+\setbeamertemplate{itemize/enumerate body begin}{\normalsize}
+\setbeamertemplate{itemize/enumerate subbody begin}{\normalsize}
+\setbeamertemplate{itemize/enumerate subsubbody begin}{\normalsize}
+
+
+% itemize
+% -------
+
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{itemize item}{\raisebox{0.1ex}{\footnotesize $\bullet$}\hskip0.1em}
+\setbeamertemplate{itemize subitem}{\raisebox{0.1ex}{\footnotesize $\circ$}\hskip0.1em}
+
+
+% enumerate
+% ---------
+
+\setbeamertemplate{enumerate item}{\insertenumlabel.}
+\setbeamertemplate{enumerate subitem}{\alph{enumii})}
+\setbeamertemplate{enumerate subsubitem}{\roman{enumiii}}
+\setbeamertemplate{enumerate mini template}{\insertenumlabel}
+
+
+% blocks
+% ------
+
+\setbeamertemplate{block begin}{%
+	\vspace*{1ex}%
+	\begin{beamercolorbox}[sep=5pt]{block title}
+	\usebeamerfont*{block title}\insertblocktitle%
+	\end{beamercolorbox}%
+	\nointerlineskip%
+	\usebeamerfont{block body}%
+	\begin{beamercolorbox}[%
+	sep=5pt
+	]{block body}%
+}
+
+\setbeamertemplate{block end}{%
+    \end{beamercolorbox}
+    \vspace*{0.2ex}
+}
+
+
+% two-column layout
+% -----------------
+% \twocolums{col1...}{col2...}
+% \twocolums[0.3]{col1...}{col2...}
+
+\usepackage{fp}
+
+\newcommand{\twocolumns}[3][]{
+	\def\widthfactor{#1}
+	\ifx\widthfactor\empty
+		\def\widthfactor{0.5}
+	\fi
+	\FPeval{\leftfactor}{0.95 * \widthfactor}
+	\FPeval{\rightfactor}{0.95 * (1 - \widthfactor)}
+	\begin{columns}[onlytextwidth]
+		\begin{column}{\leftfactor\textwidth}
+			#2
+		\end{column}
+		\begin{column}{\rightfactor\textwidth}
+			#3
+		\end{column}
+	\end{columns}
+}
