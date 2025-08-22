@@ -1,0 +1,11 @@
+\beamer@sectionintoc {1}{Biochemical model}{2}{0}{1}
+\beamer@sectionintoc {2}{Model by Lemaire(2004)}{3}{0}{2}
+\beamer@subsectionintoc {4}{1}{mechanics}{5}{0}{2}
+\beamer@subsectionintoc {4}{2}{cell dynamics}{7}{0}{2}
+\beamer@subsectionintoc {5}{1}{PK/PD model}{9}{0}{2}
+\beamer@subsectionintoc {5}{2}{cell dynamics}{11}{0}{2}
+\beamer@subsectionintoc {6}{1}{mechanics}{12}{0}{2}
+\beamer@subsectionintoc {6}{2}{evolution laws}{14}{0}{2}
+\beamer@sectionintoc {7}{Model by Martonova(2023)}{15}{0}{3}
+\beamer@subsectionintoc {7}{1}{two-state model}{15}{0}{3}
+\beamer@subsectionintoc {7}{2}{optimal cellular responsiveness}{17}{0}{3}

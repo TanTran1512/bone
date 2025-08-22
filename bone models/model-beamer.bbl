@@ -1,0 +1,43 @@
+\begin{thebibliography}{}
+
+\bibitem[Lavaill et~al., 2020]{Lavaill.2020}
+Lavaill, M., Trichilo, S., Scheiner, S., Forwood, M.~R., Cooper, D. M.~L., and
+  Pivonka, P. (2020).
+\newblock Study of the combined effects of pth treatment and mechanical loading
+  in postmenopausal osteoporosis using a new mechanistic pk-pd model.
+\newblock {\em Biomechanics and modeling in mechanobiology}, 19(5):1765--1780.
+
+\bibitem[Lemaire et~al., 2004]{Lemaire.2004}
+Lemaire, V., Tobin, F.~L., Greller, L.~D., Cho, C.~R., and Suva, L.~J. (2004).
+\newblock Modeling the interactions between osteoblast and osteoclast
+  activities in bone remodeling.
+\newblock {\em Journal of theoretical biology}, 229(3):293--309.
+
+\bibitem[Lerebours et~al., 2016]{Lerebours.2016}
+Lerebours, C., Buenzli, P.~R., Scheiner, S., and Pivonka, P. (2016).
+\newblock A multiscale mechanobiological model of bone remodelling predicts
+  site-specific bone loss in the femur during osteoporosis and mechanical
+  disuse.
+\newblock {\em Biomechanics and modeling in mechanobiology}, 15(1):43--67.
+
+\bibitem[Martonov{\'a} et~al., 2023]{Martonova.2023}
+Martonov{\'a}, D., Lavaill, M., Forwood, M.~R., Robling, A., Cooper, D. M.~L.,
+  Leyendecker, S., and Pivonka, P. (2023).
+\newblock Effects of pth glandular and external dosing patterns on bone cell
+  activity using a two-state receptor model-implications for bone disease
+  progression and treatment.
+\newblock {\em PloS one}, 18(3):e0283544.
+
+\bibitem[Pivonka et~al., 2008]{Pivonka.2008}
+Pivonka, P., Zimak, J., Smith, D.~W., Gardiner, B.~S., Dunstan, C.~R., Sims,
+  N.~A., {John Martin}, T., and Mundy, G.~R. (2008).
+\newblock Model structure and control of bone remodeling: a theoretical study.
+\newblock {\em Bone}, 43(2):249--263.
+
+\bibitem[Sansalone et~al., 2021]{Sansalone.2021}
+Sansalone, V., Martin, M., Ha{\"i}at, G., Pivonka, P., and Lemaire, T. (2021).
+\newblock A new model of bone remodeling and turnover set up in the framework
+  of generalized continuum mechanics.
+\newblock {\em Mathematics and Mechanics of Solids}, 26(9):1376--1393.
+
+\end{thebibliography}
